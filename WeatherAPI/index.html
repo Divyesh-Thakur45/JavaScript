@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .row{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+        }
+        .box{
+            border: 1px solid black;
+            /* width: 33%; */
+            margin: 20px 100px;
+            padding: 10px;
+        }
+        .box img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+    
+        </div>
+    </div>
+    <script>
+        function getData() {
+            fetch("https://reqres.in/api/users?page=2")
+            .then((res)=>res.json())
+            .then((data) => carts(data.data))
+            .catch((error)=>console.log(error))
+        }
+        getData()
+
+        function cart(id,email,first_name,last_name,avatar){
+            let div = `
+            <div class="box">
+                <img src=${avatar} alt="">
+                <p>last_name: ${last_name}</p>
+                <p>first_name: ${first_name}</p>
+                <p>email: ${email}</p>
+                <p>id: ${id}</p>
+            </div>
+            `
+            return div
+        }
+
+        function carts(data){
+            let store = data.map((el)=>{
+                return cart(el.id,el.email,el.first_name,el.last_name,el.avatar)
+            })
+            document.querySelector(".row").innerHTML = store.join("")
+        }
+    </script>
+</body>
+</html>
