@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .box {
+            border: 1px solid black;
+            padding: 15px 25px;
+            margin: 15px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+    <script>
+        function fetchData() {
+            fetch("https://api.rootnet.in/covid19-in/stats/latest").then((res) => res.json())
+                .then((data) => cart(data.data.regional))
+                .catch((error) => console.log(error))
+        }
+        fetchData()
+
+        function showData(loc, confirmedCasesIndian, deaths, discharged, totalConfirmed) {
+            let div = `
+            <div class="box">
+                <p>loc : ${loc}</p>
+                <p>confirmedCasesIndian : ${confirmedCasesIndian}</p>
+                <p>deaths : ${deaths}</p>
+                <p>discharged : ${discharged}</p>
+                <p>totalConfirmed : ${totalConfirmed}</p>
+            </div>
+            `
+            return div
+        }
+
+        function cart(regional) {
+            let store = regional.map((el) => {
+                return showData(el.loc, el.confirmedCasesIndian, el.deaths, el.discharged, el.totalConfirmed)
+            })
+            document.querySelector(".container").innerHTML = store.join("")
+        }
+
+    </script>
+</body>
+
+</html>
