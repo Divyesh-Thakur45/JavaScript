@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer & Quotes</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #clock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #b58022;
+    }
+
+    #clock>div {
+        padding: 30px;
+        margin: 30px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        box-shadow: 5px 5px 23px #7b5717, -5px -5px 23px #ffc535;
+    }
+
+    span {
+        font-size: 40px;
+    }
+
+    h1 {
+        margin: auto;
+        width: 100%;
+        font-size: 18px;
+        position: absolute;
+        top: 70%;
+        left: 32%;
+    }
+    .container{
+        position: relative;
+        overflow: hidden;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="clock">
+            <div id="hours">13</div>
+            <span>:</span>
+            <div id="minutes">13</div>
+            <span>:</span>
+            <div id="seconds">13</div>
+            <div id="half">PM</div>
+        </div>
+    
+        <h1></h1>
+    </div>
+    
+    <script>
+        setInterval(() => {
+            const date = new Date();
+            const hours = date.getHours();
+            const min = date.getMinutes();
+            const sec = date.getSeconds();
+            // const watch = `${date}:${hours}:${min}:${sec}`;
+
+            document.querySelector("#hours").innerText = hours;
+            document.querySelector("#minutes").innerText = min;
+            document.querySelector("#seconds").innerText = sec;
+
+            if(12 <= hours){
+                document.querySelector("#half").innerText = "PM"
+            }
+            else{
+                document.querySelector("#half").innerText = "AM"
+            }
+
+        }, 1000)
+
+
+        let thought = ["Everything you've ever wanted is sitting on the other side of fear.", "The question isn't who is going to let me; it's who is going to stop me.", "Every strike brings me closer to the next home run.", "Don't worry about failure; you only have to be right once", "Success is not final; failure is not fatal: It is the courage to continue that counts."]
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % thought.length;
+
+            document.querySelector("h1").innerText = thought[index]
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

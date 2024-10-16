@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // What will be the output of the above code? Explain how the **`super`** keyword is used to access methods of the parent class within the child class.
+        class Vehicle {
+            constructor(make, model) {
+                this.make = make;
+                this.model = model;
+            }
+            getInfo() {
+                return `Make: ${this.make}, Model: ${this.model}`;
+            }
+        }
+
+        class Car extends Vehicle {
+            constructor(make, model, year) {
+                super(make, model);
+                this.year = year;
+            }
+            getInfo() {
+                return `${super.getInfo()}, Year: ${this.year}`;
+            }
+        }
+
+        let myCar = new Car('Toyota', 'Camry', 2020);
+        console.log(myCar.getInfo());
+        // OUTPUT:- Make: Toyota, Model: Camry, Year: 2020
+        // In the above code, the `getInfo()` method in the `Car` class overrides the `getInfo()` method in the `Vehicle` class. This means that when the `getInfo()` method is called on an instance of the `Car` class, the `getInfo()` method in the `Car` class is executed instead of the `getInfo` method in the `Vehicle` class. 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // What will be the output of the above code? Explain how multiple levels of inheritance work in JavaScript classes.
+        class Shape {
+            constructor(color) {
+                this.color = color;
+            }
+            getColor() {
+                return this.color;
+            }
+        }
+
+        class Circle extends Shape {
+            constructor(color, radius) {
+                super(color);
+                this.radius = radius;
+            }
+        }
+
+        class ColoredCircle extends Circle {
+            constructor(color, radius) {
+                super(color, radius);
+            }
+        }
+
+        let coloredCircle = new ColoredCircle("blue", 5);
+        console.log(coloredCircle.getColor());
+
+        // OUTPUT:- blue
+        // In the above code, the ColoredCircle class inherits from the Circle class, which inherits from the Shape class. The ColoredCircle class overrides the getColor() method in the Shape class, and it also adds its own implementation of the getColor() method.
+
+    </script>
+</body>
+
+</html>
